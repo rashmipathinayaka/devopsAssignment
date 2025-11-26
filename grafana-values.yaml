@@ -1,0 +1,12 @@
+resources:
+  requests:
+    cpu: 50m
+    memory: 100Mi
+  limits:
+    cpu: 100m
+    memory: 200Mi
+
+service:
+  type: NodePort
+
+adminPassword: "admin"

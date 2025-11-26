@@ -1,0 +1,46 @@
+image:
+  repository: rashmiprasadi/ocrproject
+  tag: apigateway-v1
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8000
+  nodePort: 31080
+
+env:
+  MODEL_SERVER_URL: "http://ocrmodel-chart:8080"
+
+resources:
+  limits:
+    cpu: "300m"
+    memory: "256Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+serviceAccount:
+  create: true  # Set to true to create a ServiceAccount
+  name: apigateway-service-account  # Optional: specify a name for the service account
+
+ingress:
+  enabled: true  # Set to true to enable ingress
+  name: apigateway-ingress  # Optional: custom name for the ingress
+  hosts:
+    - host: apigateway.example.com  # Replace with your actual domain
+      paths:
+        - path: /
+          pathType: Prefix
+  # Optional TLS configuration
+  tls: []
+
+httpRoute:
+  enabled: true  # Set to true to enable HTTPRoute creation
+  parentRefs:
+    - name: some-parent-reference  # Replace with the correct reference for the parent (if applicable)
+
+autoscaling:
+  enabled: false  # Set to true to enable HPA creation
+  minReplicas: 1  # Minimum number of replicas for the HPA
+  maxReplicas: 5  # Maximum number of replicas for the HPA
+  targetCPUUtilizationPercentage: 80  # Target CPU utilization percentage

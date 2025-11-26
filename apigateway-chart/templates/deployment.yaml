@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "apigateway-chart.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apigateway
+  template:
+    metadata:
+      labels:
+        app: apigateway
+    spec:
+      containers:
+        - name: apigateway
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"  # Use values from values.yaml
+          env:
+            - name: MODEL_SERVER_URL
+              value: "{{ .Values.env.MODEL_SERVER_URL }}"  # Pass environment variables from values.yaml
+          ports:
+            - containerPort: 8000
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}  # Indentation fixes for resource section
+      imagePullSecrets:
+        - name: regcred  # This is for accessing private Docker Hub images
+
