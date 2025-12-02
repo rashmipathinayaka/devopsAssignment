@@ -6,8 +6,9 @@ import json
 
 app = FastAPI()
 
-KSERVE_URL = "http://localhost:8080/v2/models/ocr-model/infer" 
-# Your KServe model server URL
+#KSERVE_URL = "http://localhost:8080/v2/models/ocr-model/infer" 
+ KSERVE_URL = "http://ocrmodel-service:8080/v2/models/ocr-model/infer"
+#Your KServe model server URL
 
 @app.post("/gateway/ocr")
 async def gateway_ocr_request(image_file: UploadFile = File(...)):
@@ -59,3 +60,4 @@ async def gateway_ocr_request(image_file: UploadFile = File(...)):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001) # Run FastAPI app on port 8001 (or any port you prefer)
+
