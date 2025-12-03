@@ -1,6 +1,6 @@
 image:
   repository: rashmiprasadi/ocrproject
-  tag: ocrmodel-v1
+  tag: ocrmodel-new
   pullPolicy: IfNotPresent
 
 service:
