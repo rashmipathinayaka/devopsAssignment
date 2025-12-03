@@ -25,8 +25,8 @@ RUN poetry config virtualenvs.create false \
 COPY api_gateway.py /app/api_gateway.py
 
 # Expose FastAPI port
-EXPOSE 8001
+EXPOSE 8000
 
 # Run FastAPI
-CMD ["uvicorn", "api_gateway:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "api_gateway:app", "--host", "0.0.0.0", "--port", "8000"]
 
