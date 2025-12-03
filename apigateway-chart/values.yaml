@@ -1,6 +1,6 @@
 image:
   repository: rashmiprasadi/ocrproject
-  tag: apigateway-v1
+  tag: apigateway-new
   pullPolicy: IfNotPresent
 
 service:
